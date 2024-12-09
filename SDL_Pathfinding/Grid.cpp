@@ -10,6 +10,7 @@ Grid::Grid(char* filename)
 	// Initialize the terrain matrix from file (for each cell a zero value indicates it's a wall, positive values indicate terrain cell cost)
 	std::ifstream infile(filename);
 	std::string line;
+	std::vector<std::vector<int>> terrain;
 	while (std::getline(infile, line))
 	{
 		vector<int> terrain_row;
@@ -22,6 +23,17 @@ Grid::Grid(char* filename)
 	}
 	SDL_assert(terrain.size() == num_cell_y);
 	infile.close();
+
+
+	for (int i = 0; i < terrain.size(); i++)
+	{
+		this->terrain.push_back(std::vector<Node*>());
+		for (int j = 0; j < terrain[i].size(); j++)
+		{
+			this->terrain[i].push_back(new Node(cell2pix(Vector2D(j, i)), terrain[i][j]));
+		}
+	}
+
 }
 
 Grid::~Grid()

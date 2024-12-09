@@ -27,6 +27,7 @@ ScenePathFindingMouse::ScenePathFindingMouse()
 	coinPosition = Vector2D(-1,-1);
 	while ((!maze->isValidCell(coinPosition)) || (Vector2D::Distance(coinPosition, rand_cell)<3))
 		coinPosition = Vector2D((float)(rand() % maze->getNumCellX()), (float)(rand() % maze->getNumCellY()));
+	
 
 }
 
@@ -53,10 +54,12 @@ void ScenePathFindingMouse::update(float dtime, SDL_Event *event)
 		break;
 	case SDL_MOUSEMOTION:
 	case SDL_MOUSEBUTTONDOWN:
+
 		if (event->button.button == SDL_BUTTON_LEFT)
 		{
 			Vector2D cell = maze->pix2cell(Vector2D((float)(event->button.x), (float)(event->button.y)));
 			if (maze->isValidCell(cell)) {
+				//Aqui calcular el path del player y añadirle cada punto del camino al player
 				agents[0]->addPathPoint(maze->cell2pix(cell));
 			}
 		}
