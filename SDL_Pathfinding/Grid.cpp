@@ -30,7 +30,7 @@ Grid::Grid(char* filename)
 		this->terrain.push_back(std::vector<Node*>());
 		for (int j = 0; j < terrain[i].size(); j++)
 		{
-			this->terrain[i].push_back(new Node(cell2pix(Vector2D(j, i)), terrain[i][j]));
+			this->terrain[i].push_back(new Node(Vector2D(j, i), terrain[i][j]));
 		}
 	}
 
@@ -65,5 +65,5 @@ bool Grid::isValidCell(Vector2D cell)
 {
 	if ((cell.x < 0) || (cell.y < 0) || (cell.y >= terrain.size()) || (cell.x >= terrain[0].size()))
 		return false;
-	return !(terrain[(unsigned int)cell.y][(unsigned int)cell.x] == 0);
+	return !(terrain[(unsigned int)cell.y][(unsigned int)cell.x]->getType() == 0);
 }

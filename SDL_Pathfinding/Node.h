@@ -9,6 +9,6 @@ private:
 public:
 	Node(Vector2D _position, int _type);
 	Vector2D getPosition() { return position; }
-	float getWeight() { return type; }
+	int getType() { return type; }
 };
 
