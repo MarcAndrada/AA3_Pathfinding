@@ -132,11 +132,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="BFS.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PathFollowing.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="ScenePathFindingBFS.cpp" />
     <ClCompile Include="ScenePathFindingMouse.cpp" />
     <ClCompile Include="SDL_SimpleApp.cpp" />
     <ClCompile Include="Seek.cpp" />
@@ -144,12 +147,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="BFS.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="PathFollowing.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="ScenePathFindingBFS.h" />
     <ClInclude Include="ScenePathFindingMouse.h" />
     <ClInclude Include="SDL_SimpleApp.h" />
     <ClInclude Include="Seek.h" />

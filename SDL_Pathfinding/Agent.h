@@ -19,8 +19,18 @@ public:
 		virtual ~SteeringBehavior() {};
 		virtual void applySteeringForce(Agent *agent, float dtime) {};
 	};
+	class PathFindingAlgorithm
+	{
+	public:
+		PathFindingAlgorithm(Grid* _grid) { grid = _grid; };
+		virtual ~PathFindingAlgorithm() {};
+		virtual void findPath(Agent* agent, float dtime) {};
+	protected:
+		Grid* grid;
+	};
 private:
 	SteeringBehavior *steering_behaviour;
+	PathFindingAlgorithm *path_finding_algorithm;
 	Vector2D position;
 	Vector2D velocity;
 	Vector2D target;
@@ -62,5 +72,4 @@ public:
 	void update(float dtime, SDL_Event *event);
 	void draw();
 	bool Agent::loadSpriteTexture(char* filename, int num_frames=1);
-	
 };

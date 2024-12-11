@@ -6,6 +6,7 @@
 #include <time.h>
 #include "Agent.h"
 #include "Node.h"
+#include "Connection.h"
 
 class Grid
 {
@@ -24,5 +25,8 @@ public:
 	bool isValidCell(Vector2D cell);
 	int getNumCellX();
 	int getNumCellY();
+
+	std::vector<std::vector<Node*>> getTerrain() { return terrain; }
+	std::vector<Node*> getNeighbours(Node* node);
 
 };

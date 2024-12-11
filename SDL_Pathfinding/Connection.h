@@ -6,12 +6,10 @@ class Connection
 private:
 	Node* fromNode;
 	Node* toNode;
-	float cost;
 
 public:
-	Connection(Node* _fromNode, Node* _toNode, float _cost);
+	Connection(Node* _fromNode, Node* _toNode);
 	Node* getFromNode() { return fromNode; }
 	Node* getToNode() { return toNode; }
-	float getCost() { return cost; }
 };
 

@@ -1,8 +1,8 @@
-#include "ScenePathFindingMouse.h"
+#include "ScenePathFindingBFS.h"
 
 using namespace std;
 
-void ScenePathFindingMouse::update(float dtime, SDL_Event *event)
+void ScenePathFindingBFS::update(float dtime, SDL_Event* event)
 {
 	/* Keyboard & Mouse events */
 	switch (event->type) {
@@ -32,13 +32,13 @@ void ScenePathFindingMouse::update(float dtime, SDL_Event *event)
 	if ((agents[0]->getCurrentTargetIndex() == -1) && (maze->pix2cell(agents[0]->getPosition()) == coinPosition))
 	{
 		coinPosition = Vector2D(-1, -1);
-		while ((!maze->isValidCell(coinPosition)) || (Vector2D::Distance(coinPosition, maze->pix2cell(agents[0]->getPosition()))<3))
+		while ((!maze->isValidCell(coinPosition)) || (Vector2D::Distance(coinPosition, maze->pix2cell(agents[0]->getPosition())) < 3))
 			coinPosition = Vector2D((float)(rand() % maze->getNumCellX()), (float)(rand() % maze->getNumCellY()));
 	}
-	
+
 }
 
-void ScenePathFindingMouse::draw()
+void ScenePathFindingBFS::draw()
 {
 	drawMaze();
 	drawCoin();
@@ -46,7 +46,7 @@ void ScenePathFindingMouse::draw()
 	if (draw_grid)
 	{
 		SDL_SetRenderDrawColor(TheApp::Instance()->getRenderer(), 255, 255, 255, 127);
-		for (int i = 0; i < SRC_WIDTH; i+=CELL_SIZE)
+		for (int i = 0; i < SRC_WIDTH; i += CELL_SIZE)
 		{
 			SDL_RenderDrawLine(TheApp::Instance()->getRenderer(), i, 0, i, SRC_HEIGHT);
 		}
@@ -59,7 +59,7 @@ void ScenePathFindingMouse::draw()
 	agents[0]->draw();
 }
 
-const char* ScenePathFindingMouse::getTitle()
+const char* ScenePathFindingBFS::getTitle()
 {
-	return "SDL Path Finding :: PathFinding Mouse Demo";
+	return "SDL Path Finding :: PathFinding BFS";
 }

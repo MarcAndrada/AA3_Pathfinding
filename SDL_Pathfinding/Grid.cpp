@@ -24,7 +24,6 @@ Grid::Grid(char* filename)
 	SDL_assert(terrain.size() == num_cell_y);
 	infile.close();
 
-
 	for (int i = 0; i < terrain.size(); i++)
 	{
 		this->terrain.push_back(std::vector<Node*>());
@@ -33,7 +32,6 @@ Grid::Grid(char* filename)
 			this->terrain[i].push_back(new Node(Vector2D(j, i), terrain[i][j]));
 		}
 	}
-
 }
 
 Grid::~Grid()
@@ -48,6 +46,26 @@ int Grid::getNumCellX()
 int Grid::getNumCellY()
 {
 	return num_cell_y;
+}
+
+std::vector<Node*> Grid::getNeighbours(Node* node)
+{
+	std::vector<Node*> neighbours;
+
+	//Arriba
+	if (node->getPosition().y > 0 && terrain[node->getPosition().y - 1][node->getPosition().x] != nullptr)
+		neighbours.push_back(terrain[node->getPosition().y - 1][node->getPosition().x]);
+	//Abajo
+	if (node->getPosition().y < num_cell_y - 1 && terrain[node->getPosition().y + 1][node->getPosition().x] != nullptr)
+		neighbours.push_back(terrain[node->getPosition().y + 1][node->getPosition().x]);
+	//Derecha
+	if (node->getPosition().y < num_cell_y - 1 && terrain[node->getPosition().y][node->getPosition().x + 1] != nullptr)
+		neighbours.push_back(terrain[node->getPosition().y][node->getPosition().x + 1]);
+	//Izquierda
+	if (node->getPosition().y > 0 && terrain[node->getPosition().y][node->getPosition().x - 1] != nullptr)
+		neighbours.push_back(terrain[node->getPosition().y][node->getPosition().x - 1]);
+
+	return neighbours;
 }
 
 Vector2D Grid::cell2pix(Vector2D cell)
