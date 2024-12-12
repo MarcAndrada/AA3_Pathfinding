@@ -5,9 +5,7 @@
 #include <SDL_image.h>
 #include "SDL_SimpleApp.h"
 #include "Path.h"
-#include "Vector2D.h"
 #include "utils.h"
-
 
 class Agent
 {
@@ -19,18 +17,9 @@ public:
 		virtual ~SteeringBehavior() {};
 		virtual void applySteeringForce(Agent *agent, float dtime) {};
 	};
-	class PathFindingAlgorithm
-	{
-	public:
-		PathFindingAlgorithm(Grid* _grid) { grid = _grid; };
-		virtual ~PathFindingAlgorithm() {};
-		virtual void findPath(Agent* agent, float dtime) {};
-	protected:
-		Grid* grid;
-	};
+	
 private:
 	SteeringBehavior *steering_behaviour;
-	PathFindingAlgorithm *path_finding_algorithm;
 	Vector2D position;
 	Vector2D velocity;
 	Vector2D target;

@@ -1,25 +1,13 @@
 #pragma once
-#include "Agent.h"
-#include "Vector2D.h"
-#include <queue>
+#include "PathFindingAlgorithm.h"
 
 class BFS :
-	public Agent::PathFindingAlgorithm
+	public PathFindingAlgorithm
 {
 public:
-	BFS(Grid* _grid) : PathFindingAlgorithm(_grid) {}
-	~BFS();
-	void initAlgorithm(Node* _start, Node* _goal);
-	void initFinding();
-	void findPath(float dtime);
-
-private:
-	Node* start;
-	Node* goal;
-	bool goalCompleted;
-
-	std::queue<Node*> frontier;
-	std::vector<Connection*> cameFrom;
-
+	BFS(Grid* _grid, Agent* _agent);
+	~BFS() {};
+	
+	virtual void findPath(float dtime) override;
 };
 

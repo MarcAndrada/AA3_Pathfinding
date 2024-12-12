@@ -1,35 +1,24 @@
 #include "BFS.h"
-#include "Grid.h"
 
-BFS::~BFS()
-{
-}
-
-void BFS::initAlgorithm(Node* _start, Node* _goal)
-{
-	start = _start;
-	goal = _goal;
-	goalCompleted = false;
-}
-
-void BFS::initFinding()
-{
-	frontier.push(start);
-	cameFrom.push_back(new Connection(start, start));
-}
+BFS::BFS(Grid* _grid, Agent* _agent)
+	: PathFindingAlgorithm(_grid, _agent) {}
 
 void BFS::findPath(float dtime)
 {
-	Node* currentNode = frontier.front();
+	if (frontier.empty())
+		return;
+
+	Node* node = frontier.front();
 	frontier.pop();
 
-	if (currentNode == goal) {
+	if (node->getPosition() == goal->getPosition()) {
 		goalCompleted = true;
+		initPath();
 		return; 
 	}
 
 	//Recorremos los vecinos
-	for (Node* nextNode : grid->getNeighbours(currentNode)) 
+	for (Node* nextNode : grid->getNeighbours(node))
 	{
 		bool alreadyVisited = false;
 		for (Connection* connection : cameFrom)
@@ -44,15 +33,8 @@ void BFS::findPath(float dtime)
 		if (!alreadyVisited && nextNode->getType() != 0)
 		{
 			frontier.push(nextNode);
-			cameFrom.push_back(new Connection(currentNode, nextNode));
+			cameFrom.push_back(new Connection(node, nextNode));
+			nodesToPrint.push_back(nextNode);
 		}
-	}
-
-	//Reconstruimos el camino
-	currentNode = goal;
-	std::vector<Node*> path = { currentNode };
-	while (currentNode != start) {
-		currentNode = cameFrom[cameFrom.size() - 1]->getFromNode();
-		path.push_back(currentNode);
 	}
 }
