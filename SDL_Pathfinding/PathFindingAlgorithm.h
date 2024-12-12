@@ -2,6 +2,12 @@
 #include "Grid.h"
 #include <queue>
 
+struct PriorityQueueComparator {
+	bool operator()(const std::pair<Node*, int>& a, const std::pair<Node*, int>& b) const {
+		return a.second > b.second;
+	}
+};
+
 class PathFindingAlgorithm
 {
 public:
