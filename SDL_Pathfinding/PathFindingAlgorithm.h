@@ -1,6 +1,7 @@
 #pragma once
 #include "Grid.h"
 #include <queue>
+#include <unordered_map>
 
 struct PriorityQueueComparator {
 	bool operator()(const std::pair<Node*, int>& a, const std::pair<Node*, int>& b) const {
@@ -33,8 +34,10 @@ protected:
 	Node* currentNode;
 	std::vector<Node*> path;
 
-	std::queue<Node*> frontier;
+	std::queue<Node*> frontierQueue;
+	std::priority_queue<std::pair<Node*, int>, std::vector<std::pair<Node*, int>>, PriorityQueueComparator> frontierPriorityQueue;
 	std::vector<Connection*> cameFrom;
+	std::unordered_map<Node*, int> costSoFar;
 
 	Agent* agent;
 };

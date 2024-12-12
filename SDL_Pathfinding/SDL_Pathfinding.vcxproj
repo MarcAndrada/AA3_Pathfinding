@@ -134,6 +134,7 @@
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="BFS.cpp" />
     <ClCompile Include="Connection.cpp" />
+    <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Agent.h" />
     <ClInclude Include="BFS.h" />
     <ClInclude Include="Connection.h" />
+    <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Path.h" />

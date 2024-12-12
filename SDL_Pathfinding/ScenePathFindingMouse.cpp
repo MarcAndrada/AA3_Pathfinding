@@ -51,6 +51,14 @@ void ScenePathFindingMouse::update(float dtime, SDL_Event *event)
 	case SDL_KEYDOWN:
 		if (event->key.keysym.scancode == SDL_SCANCODE_SPACE)
 			draw_grid = !draw_grid;
+		else if (event->key.keysym.scancode == SDL_SCANCODE_1)
+			setAlgorithm(new BFS(maze, agents[0]));
+		else if (event->key.keysym.scancode == SDL_SCANCODE_2)
+			setAlgorithm(new Dijkstra(maze, agents[0]));
+		else if (event->key.keysym.scancode == SDL_SCANCODE_3)
+			setAlgorithm(new BFS(maze, agents[0]));
+		else if (event->key.keysym.scancode == SDL_SCANCODE_4)
+			setAlgorithm(new BFS(maze, agents[0]));
 		break;
 	case SDL_MOUSEMOTION:
 	case SDL_MOUSEBUTTONDOWN:
@@ -78,7 +86,6 @@ void ScenePathFindingMouse::update(float dtime, SDL_Event *event)
 		while ((!maze->isValidCell(coinPosition)) || (Vector2D::Distance(coinPosition, maze->pix2cell(agents[0]->getPosition()))<3))
 			coinPosition = Vector2D((float)(rand() % maze->getNumCellX()), (float)(rand() % maze->getNumCellY()));
 	}
-	
 }
 
 void ScenePathFindingMouse::draw()
@@ -166,4 +173,9 @@ bool ScenePathFindingMouse::loadTextures(char* filename_bg, char* filename_coin)
 		SDL_FreeSurface(image);
 
 	return true;
+}
+
+void ScenePathFindingMouse::setAlgorithm(PathFindingAlgorithm* _algorithm)
+{
+	algorithm = _algorithm;
 }

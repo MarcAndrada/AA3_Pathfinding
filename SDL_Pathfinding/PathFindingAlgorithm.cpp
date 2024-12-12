@@ -14,15 +14,19 @@ void PathFindingAlgorithm::initAlgorithm(Node* _goal)
 	currentNode = nullptr;
 	nodesToPrint.clear();
 	cameFrom.clear();
-	frontier = std::queue<Node*>();
+	frontierQueue = std::queue<Node*>();
+	frontierPriorityQueue = std::priority_queue<std::pair<Node*, int>, std::vector<std::pair<Node*, int>>, PriorityQueueComparator>();
+	costSoFar.clear();
 
 	initFinding();
 }
 
 void PathFindingAlgorithm::initFinding()
 {
-	frontier.push(start);
+	frontierQueue.push(start);
+	frontierPriorityQueue.push({start, 0});
 	cameFrom.push_back(new Connection(start, start));
+	costSoFar.emplace(start, 0);
 }
 
 void PathFindingAlgorithm::initPath()
@@ -60,7 +64,6 @@ void PathFindingAlgorithm::pathFinded()
 
 void PathFindingAlgorithm::update(float dtime)
 {
-
 	if (!goalCompleted)
 	{
 		findPath(dtime);

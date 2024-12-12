@@ -5,11 +5,11 @@ BFS::BFS(Grid* _grid, Agent* _agent)
 
 void BFS::findPath(float dtime)
 {
-	if (frontier.empty())
+	if (frontierQueue.empty())
 		return;
 
-	Node* node = frontier.front();
-	frontier.pop();
+	Node* node = frontierQueue.front();
+	frontierQueue.pop();
 
 	if (node->getPosition() == goal->getPosition()) {
 		goalCompleted = true;
@@ -32,7 +32,7 @@ void BFS::findPath(float dtime)
 
 		if (!alreadyVisited && nextNode->getType() != 0)
 		{
-			frontier.push(nextNode);
+			frontierQueue.push(nextNode);
 			cameFrom.push_back(new Connection(node, nextNode));
 			nodesToPrint.push_back(nextNode);
 		}

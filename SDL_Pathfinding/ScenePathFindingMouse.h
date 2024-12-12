@@ -10,6 +10,7 @@
 #include "PathFollowing.h"
 #include "Grid.h"
 #include "BFS.h"
+#include "Dijkstra.h"
 
 
 class ScenePathFindingMouse :
@@ -36,4 +37,5 @@ protected:
 	SDL_Texture* background_texture;
 	SDL_Texture* coin_texture;
 	virtual bool loadTextures(char* filename_bg, char* filename_coin);
+	virtual void setAlgorithm(PathFindingAlgorithm*);
 };
