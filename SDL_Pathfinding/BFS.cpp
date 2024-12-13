@@ -28,7 +28,7 @@ void BFS::findPath(float dtime)
 				alreadyVisited = true;
 				break;
 			}
-		}
+		} 
 
 		if (!alreadyVisited && nextNode->getType() != 0)
 		{

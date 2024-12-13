@@ -51,14 +51,14 @@ void ScenePathFindingMouse::update(float dtime, SDL_Event *event)
 	case SDL_KEYDOWN:
 		if (event->key.keysym.scancode == SDL_SCANCODE_SPACE)
 			draw_grid = !draw_grid;
-		else if (event->key.keysym.scancode == SDL_SCANCODE_1)
+		else if (event->key.keysym.scancode == SDL_SCANCODE_B)
 			setAlgorithm(new BFS(maze, agents[0]));
-		else if (event->key.keysym.scancode == SDL_SCANCODE_2)
+		else if (event->key.keysym.scancode == SDL_SCANCODE_D)
 			setAlgorithm(new Dijkstra(maze, agents[0]));
-		else if (event->key.keysym.scancode == SDL_SCANCODE_3)
-			setAlgorithm(new BFS(maze, agents[0]));
-		else if (event->key.keysym.scancode == SDL_SCANCODE_4)
-			setAlgorithm(new BFS(maze, agents[0]));
+		else if (event->key.keysym.scancode == SDL_SCANCODE_G)
+			setAlgorithm(new GreedyBFS(maze, agents[0]));
+		else if (event->key.keysym.scancode == SDL_SCANCODE_A)
+			setAlgorithm(new A(maze, agents[0]));
 		break;
 	case SDL_MOUSEMOTION:
 	case SDL_MOUSEBUTTONDOWN:

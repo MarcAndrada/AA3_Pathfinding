@@ -40,5 +40,7 @@ protected:
 	std::unordered_map<Node*, int> costSoFar;
 
 	Agent* agent;
+
+	float heuristic(Vector2D v1, Vector2D v2);
 };
 

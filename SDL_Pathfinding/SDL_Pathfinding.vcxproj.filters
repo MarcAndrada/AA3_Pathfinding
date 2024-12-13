@@ -54,6 +54,12 @@
     <ClCompile Include="Dijkstra.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GreedyBFS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="A.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h">
@@ -99,6 +105,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dijkstra.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GreedyBFS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="A.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

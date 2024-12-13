@@ -80,5 +80,13 @@ void PathFindingAlgorithm::draw()
 		Vector2D pos = grid->cell2pix(node->getPosition());
 		node->draw(pos);
 	}
-};
+}
+
+float PathFindingAlgorithm::heuristic(Vector2D v1, Vector2D v2)
+{
+	float dx = abs(v1.x - v2.x);
+	float dy = abs(v1.y - v2.y);
+	return (dx + dy);
+}
+
 

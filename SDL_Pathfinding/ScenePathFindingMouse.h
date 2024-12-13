@@ -11,6 +11,8 @@
 #include "Grid.h"
 #include "BFS.h"
 #include "Dijkstra.h"
+#include "GreedyBFS.h"
+#include "A.h"
 
 
 class ScenePathFindingMouse :

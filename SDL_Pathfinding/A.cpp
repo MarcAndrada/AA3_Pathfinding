@@ -1,9 +1,10 @@
-#include "Dijkstra.h"
+#include "A.h"
 
-Dijkstra::Dijkstra(Grid* _grid, Agent* _agent)
+A::A(Grid* _grid, Agent* _agent)
 	: PathFindingAlgorithm(_grid, _agent) {}
 
-void Dijkstra::findPath(float dtime)
+
+void A::findPath(float dtime)
 {
 	if (frontierPriorityQueue.empty())
 		return;
@@ -16,7 +17,6 @@ void Dijkstra::findPath(float dtime)
 		return;
 	}
 
-	//Recorremos los vecinos
 	for (Node* nextNode : grid->getNeighbours(node))
 	{
 		costSoFar.emplace(node, node->getType());
@@ -25,7 +25,8 @@ void Dijkstra::findPath(float dtime)
 		if (costSoFar.find(nextNode) == costSoFar.end() || newCost < costSoFar[nextNode])
 		{
 			costSoFar.emplace(nextNode, newCost);
-			frontierPriorityQueue.push({ nextNode, newCost });
+			int priority = newCost + heuristic(goal->getPosition(), nextNode->getPosition());
+			frontierPriorityQueue.push({ nextNode, priority });
 			cameFrom.push_back(new Connection(node, nextNode));
 		}
 	}
