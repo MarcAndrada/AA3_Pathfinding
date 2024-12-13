@@ -24,7 +24,7 @@ void PathFindingAlgorithm::initAlgorithm(Node* _goal)
 void PathFindingAlgorithm::initFinding()
 {
 	frontierQueue.push(start);
-	frontierPriorityQueue.push({start, 0});
+	frontierPriorityQueue.push({start, heuristic(goal->getPosition(), start->getPosition())});
 	cameFrom.push_back(new Connection(start, start));
 	costSoFar.emplace(start, 0);
 }

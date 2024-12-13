@@ -19,14 +19,23 @@ void GreedyBFS::findPath(float dtime)
 
 	for (Node* nextNode : grid->getNeighbours(node))
 	{
+		bool alreadyVisited = false;
 		for (Connection* connection : cameFrom)
 		{
-			if (connection->getFromNode()->getPosition() == nextNode->getPosition())
+			if (connection->getToNode() == nextNode)
+			{
+				alreadyVisited = true;
 				break;
+			}
 		}
+
+		if (nextNode->getType() == 0 || alreadyVisited)
+			continue;
+
 		int priority = heuristic(goal->getPosition(), nextNode->getPosition());
 		frontierPriorityQueue.push({ nextNode, priority });
 		cameFrom.push_back(new Connection(node, nextNode));
+		nodesToPrint.push_back(nextNode);
 	}
 }
 

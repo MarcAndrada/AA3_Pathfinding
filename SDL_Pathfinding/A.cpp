@@ -10,6 +10,7 @@ void A::findPath(float dtime)
 		return;
 
 	Node* node = frontierPriorityQueue.top().first;
+	frontierPriorityQueue.pop();
 
 	if (node->getPosition() == goal->getPosition()) {
 		goalCompleted = true;
@@ -19,15 +20,15 @@ void A::findPath(float dtime)
 
 	for (Node* nextNode : grid->getNeighbours(node))
 	{
-		costSoFar.emplace(node, node->getType());
 		float newCost = costSoFar[node] + nextNode->getType();
 
-		if (costSoFar.find(nextNode) == costSoFar.end() || newCost < costSoFar[nextNode])
+		if ((costSoFar.find(nextNode) == costSoFar.end() || newCost < costSoFar[nextNode]) && nextNode->getType() != 0)
 		{
-			costSoFar.emplace(nextNode, newCost);
+			costSoFar[nextNode] = newCost;
 			int priority = newCost + heuristic(goal->getPosition(), nextNode->getPosition());
 			frontierPriorityQueue.push({ nextNode, priority });
 			cameFrom.push_back(new Connection(node, nextNode));
+			nodesToPrint.push_back(nextNode);
 		}
 	}
 }
