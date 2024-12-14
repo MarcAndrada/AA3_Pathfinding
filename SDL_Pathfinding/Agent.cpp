@@ -133,6 +133,9 @@ Vector2D Agent::getPathPoint(int idx)
 
 void Agent::clearPath()
 {
+	if (isEnemy)
+		return;
+
 	setCurrentTargetIndex(-1);
 	path.points.clear();
 }

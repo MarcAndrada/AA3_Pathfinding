@@ -23,6 +23,7 @@ private:
 	Vector2D position;
 	Vector2D velocity;
 	Vector2D target;
+	bool isEnemy;
 
 	// Pathfinding
 	Path path;
@@ -38,6 +39,8 @@ private:
 	int sprite_num_frames;
 	int sprite_w;
 	int sprite_h;
+
+	
 
 public:
 	Agent();
