@@ -4,6 +4,7 @@
 
 #include "SDL_SimpleApp.h"
 #include "ScenePathFindingMouse.h"
+#include "SceneTSP.h"
 
 using namespace std;
 
@@ -43,13 +44,16 @@ int main(int argc, char ** argv)
 		case SDL_KEYDOWN:
 			if (event.key.keysym.scancode == SDL_SCANCODE_1)
 			{
-				
+				delete curr_scene;
+				curr_scene = new ScenePathFindingMouse;
 			}
 			if (event.key.keysym.scancode == SDL_SCANCODE_2)
 			{
 			}
 			if (event.key.keysym.scancode == SDL_SCANCODE_3)
 			{
+				delete curr_scene;
+				curr_scene = new SceneTSP;
 			}
 			if (event.key.keysym.scancode == SDL_SCANCODE_4)
 			{
