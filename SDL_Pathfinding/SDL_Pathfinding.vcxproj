@@ -142,6 +142,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PathFindingAlgorithm.cpp" />
     <ClCompile Include="PathFollowing.cpp" />
+    <ClCompile Include="ScenePathFindingEnemies.cpp" />
     <ClCompile Include="ScenePathFindingMouse.cpp" />
     <ClCompile Include="SceneTSP.cpp" />
     <ClCompile Include="SDL_SimpleApp.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="PathFindingAlgorithm.h" />
     <ClInclude Include="PathFollowing.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="ScenePathFindingEnemies.h" />
     <ClInclude Include="ScenePathFindingMouse.h" />
     <ClInclude Include="SceneTSP.h" />
     <ClInclude Include="SDL_SimpleApp.h" />
