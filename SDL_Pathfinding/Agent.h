@@ -43,7 +43,7 @@ private:
 	
 
 public:
-	Agent();
+	Agent(bool _isEnemy = false, float _maxForce = 150, float _maxVelocity = 200);
 	~Agent();
 	Vector2D getPosition();
 	Vector2D getTarget();
@@ -59,9 +59,11 @@ public:
 	void setCurrentTargetIndex(int idx);
 	int getCurrentTargetIndex();
 	int getPathSize();
+	bool GetIsEnemy();
 	Vector2D getPathPoint(int idx);
 	void clearPath();
 	void update(float dtime, SDL_Event *event);
 	void draw();
 	bool Agent::loadSpriteTexture(char* filename, int num_frames=1);
+
 };

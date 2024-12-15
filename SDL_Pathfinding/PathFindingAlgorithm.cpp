@@ -57,6 +57,8 @@ void PathFindingAlgorithm::pathFinded()
 		{
 			Vector2D position = grid->cell2pix(node->getPosition());
 			agent->addPathPoint(position);
+			std::cout << nodesToPrint.size();
+
 		}
 		path.clear();
 	}
