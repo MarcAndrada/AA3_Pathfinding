@@ -17,6 +17,7 @@ ScenePathFindingEnemies::ScenePathFindingEnemies()
 	agent->setTarget(Vector2D(-20, -20));
 	agents.push_back(agent);
 
+
 	// set agent position coords to the center of a random cell
 	Vector2D rand_cell(-1, -1);
 	while (!maze->isValidCell(rand_cell))
@@ -29,6 +30,152 @@ ScenePathFindingEnemies::ScenePathFindingEnemies()
 		coinPosition = Vector2D((float)(rand() % maze->getNumCellX()), (float)(rand() % maze->getNumCellY()));
 
 	algorithm = new Dijkstra(maze, agents[0]);
+
+
+	//Inicializar Enemigos
+	Agent* currentEnemy = new Agent(true, 5, 10);
+	currentEnemy->loadSpriteTexture("../res/soldier.png", 4);
+	currentEnemy->setBehavior(new PathFollowing);
+	#pragma region Enemy 1 Path
+	currentEnemy->setPosition(maze->cell2pix(Vector2D(3, 11)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(3,11)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(3,10)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(4,10)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(5,10)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(6,10)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(7,10)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(7,11)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(7,12)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(7,13)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(7,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(8,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(9,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(10,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(11,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(12,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(13,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(14,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(15,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(16,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(17,14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(17, 15)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(17, 16)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(17, 17)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(17, 18)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(16, 18)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(16, 19)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(16, 20)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(16, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(15, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(14, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(13, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(12, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(11, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(10, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(10, 20)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(10, 19)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(10, 18)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(9, 18)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(8, 18)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(7, 18)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(6, 18)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(6, 19)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(6, 20)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(6, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(5, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(4, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(3, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 21)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 20)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 19)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 18)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 17)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 16)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 15)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 14)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 13)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 12)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 11)));
+#pragma endregion
+	agents.push_back(currentEnemy);
+
+
+	currentEnemy = new Agent(true, 5, 10);
+	currentEnemy->loadSpriteTexture("../res/soldier.png", 4);
+	currentEnemy->setBehavior(new PathFollowing);
+	currentEnemy->setPosition(maze->cell2pix(Vector2D(32, 3)));
+	#pragma region Enemy 2 Path
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(32, 3)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(32, 4)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(32, 5)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(32, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(31, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(30, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(29, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(28, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(27, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(26, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(25, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(24, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(23, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(22, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(21, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(20, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(19, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(18, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(17, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(16, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(15, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(14, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(13, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(12, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(11, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(10, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(9, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(8, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(7, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(6, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(5, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(4, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(3, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 6)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 5)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 4)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 3)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(2, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(3, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(4, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(5, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(6, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(7, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(8, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(9, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(10, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(11, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(12, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(13, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(14, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(15, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(16, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(17, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(18, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(19, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(20, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(21, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(22, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(23, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(24, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(25, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(26, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(27, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(28, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(29, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(30, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(31, 2)));
+	currentEnemy->addPathPoint(maze->cell2pix(Vector2D(32, 2)));
+	#pragma endregion
+	agents.push_back(currentEnemy);
+
 }
 
 ScenePathFindingEnemies::~ScenePathFindingEnemies()
@@ -68,8 +215,35 @@ void ScenePathFindingEnemies::update(float dtime, SDL_Event *event)
 		break;
 	}
 
-	agents[0]->update(dtime, event);
+
+	//Resetear pesos en el Grid
+	for (int i = 1; i < maze->getTerrain().size(); i++) 
+	{
+		for (int j = 1; j < maze->getTerrain()[i].size(); j++)
+		{
+			maze->getTerrain()[i][j]->setWeight(0);
+		}
+	}
+	//Setear los pesos en los parientes de los enemigos
+	for (int i = 1; i < agents.size(); i++) 
+	{
+		Vector2D agentCellPos = maze->pix2cell(agents[i]->getPosition());
+		Node* agentNode = maze->getTerrain()[agentCellPos.y][agentCellPos.x];
+		std::vector<Node*> neighbours = maze->getNeighbours(agentNode);
+		for (int j = 0; j < neighbours.size(); j++)
+		{
+			neighbours[j]->setWeight(10);
+		}
+
+		agentNode->setWeight(1000);
+	}
+
+
 	algorithm->update(dtime);
+	for (Agent* currentAgent : agents)
+	{
+		currentAgent->update(dtime, event);
+	}
 
 	// if we have arrived to the coin, replace it in a random cell!
 	if ((agents[0]->getCurrentTargetIndex() == -1) && (maze->pix2cell(agents[0]->getPosition()) == coinPosition))
@@ -98,13 +272,17 @@ void ScenePathFindingEnemies::draw()
 		}
 	}
 
-	agents[0]->draw();
 	algorithm->draw();
+	for (Agent* currentAgent : agents)
+	{
+		currentAgent->draw();
+	}
+	
 }
 
 const char* ScenePathFindingEnemies::getTitle()
 {
-	return "SDL Path Finding :: PathFinding Mouse Demo";
+	return "SDL Path Finding :: PathFinding Enemies";
 }
 
 void ScenePathFindingEnemies::drawMaze()
