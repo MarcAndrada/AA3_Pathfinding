@@ -5,6 +5,7 @@ Node::Node(Vector2D _position, int _type)
 {
 	position = _position;
 	type = _type;
+	weight = 0;
 }
 
 void Node::draw(Vector2D pos)

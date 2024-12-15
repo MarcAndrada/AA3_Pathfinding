@@ -215,6 +215,30 @@ void ScenePathFindingEnemies::update(float dtime, SDL_Event *event)
 		break;
 	}
 
+
+	//Resetear pesos en el Grid
+	for (int i = 1; i < maze->getTerrain().size(); i++) 
+	{
+		for (int j = 1; j < maze->getTerrain()[i].size(); j++)
+		{
+			maze->getTerrain()[i][j]->setWeight(0);
+		}
+	}
+	//Setear los pesos en los parientes de los enemigos
+	for (int i = 1; i < agents.size(); i++) 
+	{
+		Vector2D agentCellPos = maze->pix2cell(agents[i]->getPosition());
+		Node* agentNode = maze->getTerrain()[agentCellPos.y][agentCellPos.x];
+		std::vector<Node*> neighbours = maze->getNeighbours(agentNode);
+		for (int j = 0; j < neighbours.size(); j++)
+		{
+			neighbours[j]->setWeight(10);
+		}
+
+		agentNode->setWeight(1000);
+	}
+
+
 	algorithm->update(dtime);
 	for (Agent* currentAgent : agents)
 	{
