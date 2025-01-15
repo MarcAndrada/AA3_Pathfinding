@@ -134,6 +134,7 @@
     <ClCompile Include="A.cpp" />
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="BFS.cpp" />
+    <ClCompile Include="Blackboard.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="GreedyBFS.cpp" />
@@ -142,17 +143,20 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PathFindingAlgorithm.cpp" />
     <ClCompile Include="PathFollowing.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="ScenePathFindingEnemies.cpp" />
     <ClCompile Include="ScenePathFindingMouse.cpp" />
     <ClCompile Include="SceneTSP.cpp" />
     <ClCompile Include="SDL_SimpleApp.cpp" />
     <ClCompile Include="Seek.cpp" />
+    <ClCompile Include="SensorySystem.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="A.h" />
     <ClInclude Include="Agent.h" />
     <ClInclude Include="BFS.h" />
+    <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="GreedyBFS.h" />
@@ -161,12 +165,14 @@
     <ClInclude Include="Path.h" />
     <ClInclude Include="PathFindingAlgorithm.h" />
     <ClInclude Include="PathFollowing.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ScenePathFindingEnemies.h" />
     <ClInclude Include="ScenePathFindingMouse.h" />
     <ClInclude Include="SceneTSP.h" />
     <ClInclude Include="SDL_SimpleApp.h" />
     <ClInclude Include="Seek.h" />
+    <ClInclude Include="SensorySystem.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>

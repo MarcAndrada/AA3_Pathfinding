@@ -7,9 +7,10 @@ private:
 	float externalRadius, internalRadius, fordwardRadius, backwardRadius;
 	float fordwardAngle, visionAngle;
 	int visionPercentage;
+	Vector2D playerPos;
+
 public:
 	SensorySystem();
-	int CheckVision(Vector2D playerPos, Vector2D agentPos);
-	int Update(Vector2D playerPos, Vector2D agentPos, float dtime);
+	int CheckVision(Vector2D agentPos);
 };
 

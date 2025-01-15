@@ -1,4 +1,5 @@
 #include "Agent.h"
+#include "PlayerManager.h"
 
 using namespace std;
 
@@ -17,6 +18,8 @@ Agent::Agent(bool _isEnemy, float _maxForce, float _maxVelocity) : sprite_textur
 	             draw_sprite(false),
 				 isEnemy(_isEnemy)
 {
+	sensorySystem = new SensorySystem();
+	blackboard = new Blackboard();
 }
 
 Agent::~Agent()
@@ -79,9 +82,6 @@ void Agent::setVelocity(Vector2D _velocity)
 
 void Agent::update(float dtime, SDL_Event *event)
 {
-
-	//cout << "agent update:" << endl;
-
 	switch (event->type) {
 		/* Keyboard & Mouse events */
 	case SDL_KEYDOWN:
@@ -92,7 +92,9 @@ void Agent::update(float dtime, SDL_Event *event)
 		break;
 	}
 
-	// Apply the steering behavior
+	blackboard->UpdateAgentState(sensorySystem->CheckVision(position));
+
+	// Apply State
 	steering_behaviour->applySteeringForce(this, dtime);
 	
 	// Update orientation

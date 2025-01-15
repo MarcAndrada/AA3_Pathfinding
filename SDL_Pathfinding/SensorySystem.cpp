@@ -1,4 +1,5 @@
 #include "SensorySystem.h"
+#include "PlayerManager.h"
 
 SensorySystem::SensorySystem()
 {
@@ -9,10 +10,13 @@ SensorySystem::SensorySystem()
 	fordwardAngle = 0.9f;
 	visionAngle = 0.4f;
 	visionPercentage = 0;
+	playerPos = Vector2D();
 }
 
-int SensorySystem::CheckVision(Vector2D playerPos, Vector2D agentPos)
+int SensorySystem::CheckVision(Vector2D agentPos)
 {
+	playerPos = PLAYER.GetPlayer().getPosition();
+
 	float playerDistance;
 	playerDistance = Vector2D::Distance(agentPos,playerPos);
 	if (playerDistance > externalRadius)

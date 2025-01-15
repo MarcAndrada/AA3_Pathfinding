@@ -6,6 +6,8 @@
 #include "SDL_SimpleApp.h"
 #include "Path.h"
 #include "utils.h"
+#include "SensorySystem.h"
+#include "Blackboard.h"
 
 class Agent
 {
@@ -40,7 +42,8 @@ private:
 	int sprite_w;
 	int sprite_h;
 
-	
+	SensorySystem *sensorySystem;
+	Blackboard* blackboard;
 
 public:
 	Agent(bool _isEnemy = false, float _maxForce = 150, float _maxVelocity = 200);
