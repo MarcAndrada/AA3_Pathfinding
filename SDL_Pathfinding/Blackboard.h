@@ -11,7 +11,7 @@ private:
 
 public:
 	Blackboard();
-	void UpdateAgentState(int percentatgeVision);
+	void UpdateAgentState(int _percentatgeVision);
 	void ChooseBehaviour(int _percentatgeVision);
 };
 
