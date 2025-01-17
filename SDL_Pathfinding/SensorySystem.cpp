@@ -1,5 +1,4 @@
 #include "SensorySystem.h"
-#include "PlayerManager.h"
 
 SensorySystem::SensorySystem()
 {
@@ -7,22 +6,26 @@ SensorySystem::SensorySystem()
 	externalRadius = 400.0f;
 	backwardRadius = 50.0;
 	fordwardRadius = 250.0f;
+
 	fordwardAngle = 0.9f;
 	visionAngle = 0.4f;
+
 	visionPercentage = 0;
 	playerPos = Vector2D();
+
+	data = new BlackboardData();
 }
 
-int SensorySystem::CheckVision(Vector2D agentPos)
+int SensorySystem::CheckVision()
 {
-	playerPos = PLAYER.GetPlayer().getPosition();
+	playerPos = data->realPlayerPosition;
 
 	float playerDistance;
-	playerDistance = Vector2D::Distance(agentPos,playerPos);
+	playerDistance = Vector2D::Distance(data->agentPosition,playerPos);
 	if (playerDistance > externalRadius)
 		return 0;
 
-	float angleAgentPlayer = Vector2D::Dot(playerPos.Normalize(), agentPos.Normalize());
+	float angleAgentPlayer = Vector2D::Dot(playerPos.Normalize(), data->agentPosition.Normalize());
 	if (angleAgentPlayer < 0)
 	{
 		if (playerDistance > backwardRadius)
@@ -34,7 +37,7 @@ int SensorySystem::CheckVision(Vector2D agentPos)
 	if (playerDistance < fordwardRadius && angleAgentPlayer < fordwardAngle)
 		return 100;
 
-	if (angleAgentPlayer > visionAngle)
+	if (angleAgentPlayer < visionAngle)
 	{
 		if (playerDistance > internalRadius)
 			return 30;
@@ -47,13 +50,10 @@ int SensorySystem::CheckVision(Vector2D agentPos)
 	return 0;
 }
 
-int SensorySystem::Update(Vector2D playerPos, Vector2D agentPos, float dtime)
+void SensorySystem::Update(Vector2D agentPos, Vector2D playerPos, float dtime)
 {
-	visionPercentage = CheckVision(playerPos, agentPos);
+	data->agentPosition = agentPos;
+	data->lastSeenPlayerPosition = playerPos;
 
-	if(visionPercentage==100) 
-	{
-		//Shoot
-	}
-	
+	data->percentatgeVision = CheckVision();
 }

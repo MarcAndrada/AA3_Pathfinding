@@ -3,9 +3,7 @@
 #include <SDL_image.h>
 
 #include "SDL_SimpleApp.h"
-#include "ScenePathFindingMouse.h"
-#include "ScenePathFindingEnemies.h"
-#include "SceneTSP.h"
+#include "SceneDecisionMaking.h"
 
 using namespace std;
 
@@ -25,7 +23,7 @@ int main(int argc, char ** argv)
 	
 	SDL_SimpleApp *app = SDL_SimpleApp::Instance();
 
-	Scene *curr_scene = new ScenePathFindingMouse;
+	Scene *curr_scene = new SceneDecisionMaking();
 	app->setWindowTitle(curr_scene->getTitle());
 
 	
@@ -43,30 +41,6 @@ int main(int argc, char ** argv)
 		switch (event.type)
 		{
 		case SDL_KEYDOWN:
-			if (event.key.keysym.scancode == SDL_SCANCODE_1)
-			{
-				delete curr_scene;
-				curr_scene = new ScenePathFindingMouse;
-				app->setWindowTitle(curr_scene->getTitle());
-
-			}
-			if (event.key.keysym.scancode == SDL_SCANCODE_2)
-			{
-				delete curr_scene;
-				curr_scene = new ScenePathFindingEnemies;
-				app->setWindowTitle(curr_scene->getTitle());
-
-			}
-			if (event.key.keysym.scancode == SDL_SCANCODE_3)
-			{
-				delete curr_scene;
-				curr_scene = new SceneTSP;
-				app->setWindowTitle(curr_scene->getTitle());
-
-			}
-			if (event.key.keysym.scancode == SDL_SCANCODE_4)
-			{
-			}
 			if ((event.key.keysym.scancode == SDL_SCANCODE_Q) || (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE))
 			{
 				quit = true;

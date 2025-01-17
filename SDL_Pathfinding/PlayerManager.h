@@ -6,10 +6,10 @@
 class PlayerManager
 {
 private:
-	Agent player;
+	Agent *player;
 	bool hasGun;
 
-	PlayerManager();
+	PlayerManager() = default;
 
 	~PlayerManager() {}
 	PlayerManager(const PlayerManager&) = delete;
@@ -22,7 +22,8 @@ public:
 		return manager;
 	}
 
-	inline Agent GetPlayer() { return player; }
+	inline Agent *GetPlayer() { return player; }
 	inline bool GetHasGun() { return hasGun; }
+	inline void SetPlayer(Agent* _player) { player = _player; }
 };
 

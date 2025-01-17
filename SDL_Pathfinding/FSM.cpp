@@ -1,4 +1,5 @@
 #include "FSM.h"
+#include "FSMState_Patrol.h"
 
 void FSM::ChangeState(FSMState* newState)
 {
@@ -7,9 +8,14 @@ void FSM::ChangeState(FSMState* newState)
 	currentState->Enter();
 }
 
-void FSM::Update(float dtime)
+FSM::FSM()
 {
-	FSMState* newState = currentState->Update(dtime);
+	currentState = new FSMState_Patrol();
+}
+
+void FSM::Update(Agent *agent, float dtime)
+{
+	FSMState* newState = currentState->Update(agent, dtime);
 	if (newState != nullptr)
 		ChangeState(newState);
 }

@@ -1,12 +1,24 @@
 #pragma once
+
+class Agent;
+
 class FSMState
 {
-private:
+protected:
+	float currentTime;
+	float timeToChange;
+	FSMState *newState;
 
 public:
-	FSMState() = default;
-	virtual void Enter() {};
-	virtual FSMState* Update(float dtime) {};
-	virtual void Exit() {};
+	FSMState()
+	{
+		currentTime = 0.f;
+		timeToChange = 5.f;
+		newState = nullptr;
+	}
+
+	virtual void Enter() = 0;
+	virtual FSMState* Update(Agent* agent, float dtime) = 0;
+	virtual void Exit() = 0;
 };
 

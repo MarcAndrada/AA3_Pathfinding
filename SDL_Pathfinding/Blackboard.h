@@ -1,17 +1,18 @@
-#include "Vector2D.h"
-
 #pragma once
+#include "BlackboardData.h"
+
 class Blackboard
 {
 private:
-	bool hasGun;
-	bool isVisible;
-	Vector2D playerPosition;
-	Vector2D lastPlayerPosition;
+	BlackboardData* data;
 
 public:
-	Blackboard();
-	void UpdateAgentState(int _percentatgeVision);
-	void ChooseBehaviour(int _percentatgeVision);
+	Blackboard()
+	{
+		data = new BlackboardData();
+	}
+
+	inline BlackboardData *GetData() { return data; }
+	inline void SetData(BlackboardData* _data) { data = _data; }
 };
 

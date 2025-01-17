@@ -3,11 +3,14 @@
 #include <minmax.h>
 #include <SDL.h>
 #include <SDL_image.h>
+
 #include "SDL_SimpleApp.h"
 #include "Path.h"
 #include "utils.h"
 #include "SensorySystem.h"
 #include "Blackboard.h"
+
+class FSM;
 
 class Agent
 {
@@ -42,6 +45,7 @@ private:
 	int sprite_w;
 	int sprite_h;
 
+	FSM* brain;
 	SensorySystem *sensorySystem;
 	Blackboard* blackboard;
 
@@ -54,6 +58,7 @@ public:
 	float getMaxVelocity();
 	float getMaxForce();
 	float getMass();
+	Blackboard* getBlackboard();
 	void setBehavior(SteeringBehavior *behavior);
 	void setPosition(Vector2D position);
 	void setTarget(Vector2D target);
@@ -62,7 +67,6 @@ public:
 	void setCurrentTargetIndex(int idx);
 	int getCurrentTargetIndex();
 	int getPathSize();
-	bool GetIsEnemy();
 	Vector2D getPathPoint(int idx);
 	void clearPath();
 	void update(float dtime, SDL_Event *event);

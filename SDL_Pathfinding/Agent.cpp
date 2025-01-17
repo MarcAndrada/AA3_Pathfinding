@@ -1,5 +1,5 @@
 #include "Agent.h"
-#include "PlayerManager.h"
+#include "FSM.h"
 
 using namespace std;
 
@@ -20,6 +20,7 @@ Agent::Agent(bool _isEnemy, float _maxForce, float _maxVelocity) : sprite_textur
 {
 	sensorySystem = new SensorySystem();
 	blackboard = new Blackboard();
+	brain = new FSM();
 }
 
 Agent::~Agent()
@@ -65,6 +66,11 @@ float Agent::getMass()
 	return mass;
 }
 
+Blackboard* Agent::getBlackboard()
+{
+	return blackboard;
+}
+
 void Agent::setPosition(Vector2D _position)
 {
 	position = _position;
@@ -92,9 +98,9 @@ void Agent::update(float dtime, SDL_Event *event)
 		break;
 	}
 
-	blackboard->UpdateAgentState(sensorySystem->CheckVision(position));
-
-	// Apply State
+	sensorySystem->Update(position, blackboard->GetData()->lastSeenPlayerPosition, dtime);
+	blackboard->SetData(sensorySystem->GetData());
+	brain->Update(this, dtime);
 	steering_behaviour->applySteeringForce(this, dtime);
 	
 	// Update orientation
@@ -108,7 +114,6 @@ void Agent::update(float dtime, SDL_Event *event)
 	if (position.y > TheApp::Instance()->getWinSize().y) position.y = 0;
 }
 
-
 void Agent::addPathPoint(Vector2D point)
 {
 	if (path.points.size() > 0)
@@ -117,7 +122,6 @@ void Agent::addPathPoint(Vector2D point)
 
 	path.points.push_back(point);
 }
-
 
 int Agent::getCurrentTargetIndex()
 {

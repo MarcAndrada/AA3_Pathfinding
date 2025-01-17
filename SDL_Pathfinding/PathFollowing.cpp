@@ -59,7 +59,7 @@ void PathFollowing::applySteeringForce(Agent *agent, float dtime)
 			agent->setCurrentTargetIndex(agent->getCurrentTargetIndex() + 1);
 		}
 		// Seek to current target
-		agent->setTarget(agent->getPathPoint(agent->getCurrentTargetIndex()));
+		agent->setTarget(Vector2D(agent->getPathPoint(agent->getCurrentTargetIndex())));
 
 		Vector2D desired_velocity = agent->getTarget() - agent->getPosition();
 		desired_velocity.Normalize();
