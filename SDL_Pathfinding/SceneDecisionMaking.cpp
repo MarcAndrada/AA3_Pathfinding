@@ -50,9 +50,6 @@ void SceneDecisionMaking::update(float dtime, SDL_Event* event)
 	/* Keyboard & Mouse events */
 	switch (event->type) {
 	case SDL_KEYDOWN:
-		if (event->key.keysym.scancode == SDL_SCANCODE_SPACE)
-			draw_grid = !draw_grid;
-		break;
 	case SDL_MOUSEMOTION:
 	case SDL_MOUSEBUTTONDOWN:
 		if (event->button.button == SDL_BUTTON_LEFT)
@@ -60,8 +57,8 @@ void SceneDecisionMaking::update(float dtime, SDL_Event* event)
 			Vector2D cell = MAZE.GetGrid()->pix2cell(Vector2D((float)(event->button.x), (float)(event->button.y)));
 			if (MAZE.GetGrid()->isValidCell(cell)) {
 				//Aqui calcular el path del player y añadirle cada punto del camino al player
-				agents[0]->clearPath();
-				agents[0]->getAlgorithm()->initAlgorithm(new Node(cell, 1));
+				PLAYER.GetPlayer()->clearPath();
+				PLAYER.GetPlayer()->getAlgorithm()->initAlgorithm(new Node(cell, 1));
 			}
 		}
 		break;

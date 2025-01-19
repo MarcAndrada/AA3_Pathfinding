@@ -93,7 +93,7 @@ void Agent::update(float dtime, SDL_Event *event)
 		/* Keyboard & Mouse events */
 	case SDL_KEYDOWN:
 		if (event->key.keysym.scancode == SDL_SCANCODE_SPACE)
-			draw_sprite = !draw_sprite;
+			sensorySystem->SetHasGun(!blackboard->GetData()->hasGun);
 		break;
 	default:
 		break;
@@ -104,6 +104,7 @@ void Agent::update(float dtime, SDL_Event *event)
 		sensorySystem->Update(position, getVelocity(), PLAYER.GetPlayer()->getPosition() , dtime);
 		blackboard->SetData(sensorySystem->GetData());
 		brain->Update(this, dtime);
+		std::cout << blackboard->GetData()->hasGun << std::endl;
 	}
 	steering_behaviour->applySteeringForce(this, dtime);
 	

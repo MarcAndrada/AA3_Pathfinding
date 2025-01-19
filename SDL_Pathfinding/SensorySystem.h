@@ -20,5 +20,6 @@ public:
 	void Update(Vector2D agentPos, Vector2D agentVelocity, Vector2D playerPos, float dtime);
 
 	inline BlackboardData* GetData() { return data; }
+	inline void SetHasGun(bool _hasGun) { data->hasGun = _hasGun; }
 };
 
