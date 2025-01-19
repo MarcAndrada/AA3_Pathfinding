@@ -11,6 +11,7 @@
 #include "Blackboard.h"
 
 class FSM;
+class PathFindingAlgorithm;
 
 class Agent
 {
@@ -48,6 +49,7 @@ private:
 	FSM* brain;
 	SensorySystem *sensorySystem;
 	Blackboard* blackboard;
+	PathFindingAlgorithm* algorithm;
 
 public:
 	Agent(bool _isEnemy = false, float _maxForce = 150, float _maxVelocity = 200);
@@ -72,5 +74,6 @@ public:
 	void update(float dtime, SDL_Event *event);
 	void draw();
 	bool Agent::loadSpriteTexture(char* filename, int num_frames=1);
-
+	void setAlgorithm(PathFindingAlgorithm* _algorithm);
+	PathFindingAlgorithm* getAlgorithm() { return algorithm; }
 };

@@ -12,10 +12,12 @@ private:
 
 	BlackboardData *data;
 
+	float checkCellOffset = 0.5f;
+	bool CheckWallsBetweenAgentAndPlayer(Vector2D agentPosition);
 public:
 	SensorySystem();
 	int CheckVision();
-	void Update(Vector2D agentPos, Vector2D playerPos, float dtime);
+	void Update(Vector2D agentPos, Vector2D agentVelocity, Vector2D playerPos, float dtime);
 
 	inline BlackboardData* GetData() { return data; }
 };

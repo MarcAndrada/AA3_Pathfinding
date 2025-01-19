@@ -4,7 +4,6 @@
 #include <sstream>
 #include <string>
 #include <time.h>
-#include "Agent.h"
 #include "Node.h"
 #include "Connection.h"
 

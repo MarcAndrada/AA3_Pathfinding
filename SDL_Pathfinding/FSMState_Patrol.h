@@ -3,7 +3,7 @@
 class FSMState_Patrol : public FSMState
 {
 private:
-
+	bool nearToTarget;
 public:
 	FSMState_Patrol();
 	virtual void Enter() override;

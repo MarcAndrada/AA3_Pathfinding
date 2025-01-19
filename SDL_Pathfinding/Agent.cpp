@@ -1,6 +1,7 @@
 #include "Agent.h"
 #include "FSM.h"
-
+#include "PathFindingAlgorithm.h"
+#include "PlayerManager.h"
 using namespace std;
 
 Agent::Agent(bool _isEnemy, float _maxForce, float _maxVelocity) : sprite_texture(0),
@@ -98,9 +99,12 @@ void Agent::update(float dtime, SDL_Event *event)
 		break;
 	}
 
-	sensorySystem->Update(position, blackboard->GetData()->lastSeenPlayerPosition, dtime);
-	blackboard->SetData(sensorySystem->GetData());
-	brain->Update(this, dtime);
+	if (isEnemy) 
+	{
+		sensorySystem->Update(position, getVelocity(), PLAYER.GetPlayer()->getPosition() , dtime);
+		blackboard->SetData(sensorySystem->GetData());
+		brain->Update(this, dtime);
+	}
 	steering_behaviour->applySteeringForce(this, dtime);
 	
 	// Update orientation
@@ -112,6 +116,9 @@ void Agent::update(float dtime, SDL_Event *event)
 	if (position.y < 0) position.y = TheApp::Instance()->getWinSize().y;
 	if (position.x > TheApp::Instance()->getWinSize().x) position.x = 0;
 	if (position.y > TheApp::Instance()->getWinSize().y) position.y = 0;
+
+
+	algorithm->update(dtime);
 }
 
 void Agent::addPathPoint(Vector2D point)
@@ -140,11 +147,6 @@ Vector2D Agent::getPathPoint(int idx)
 
 void Agent::clearPath()
 {
-	if (isEnemy) {
-		setCurrentTargetIndex(0);
-		return;
-	}
-
 	setCurrentTargetIndex(-1);
 	path.points.clear();
 }
@@ -157,12 +159,19 @@ void Agent::setCurrentTargetIndex(int idx)
 void Agent::draw()
 {
 	// Path
-	for (int i = 0; i < (int)path.points.size(); i++)
-	{
-		draw_circle(TheApp::Instance()->getRenderer(), (int)(path.points[i].x), (int)(path.points[i].y), 15, 255, 255, 0, 255);
-		if (i > 0)
-			SDL_RenderDrawLine(TheApp::Instance()->getRenderer(), (int)(path.points[i - 1].x), (int)(path.points[i - 1].y), (int)(path.points[i].x), (int)(path.points[i].y));
-	}
+	if (!isEnemy)
+		algorithm->draw();
+
+		for (int i = 0; i < (int)path.points.size(); i++)
+		{
+			if(!isEnemy)
+				draw_circle(TheApp::Instance()->getRenderer(), (int)(path.points[i].x), (int)(path.points[i].y), 15, 255, 255, 0, 255);
+			else
+				draw_circle(TheApp::Instance()->getRenderer(), (int)(path.points[i].x), (int)(path.points[i].y), 15, 255, 0, 0, 255);
+			if (i > 0)
+				SDL_RenderDrawLine(TheApp::Instance()->getRenderer(), (int)(path.points[i - 1].x), (int)(path.points[i - 1].y), (int)(path.points[i].x), (int)(path.points[i].y));
+		}
+		
 
 	if (draw_sprite)
 	{
@@ -184,6 +193,7 @@ void Agent::draw()
 		SDL_RenderDrawLine(TheApp::Instance()->getRenderer(), (int)position.x, (int)position.y, (int)(position.x+15*cos(orientation*DEG2RAD)), (int)(position.y+15*sin(orientation*DEG2RAD)));
 	}
 
+	
 	
 }
 
@@ -207,4 +217,9 @@ bool Agent::loadSpriteTexture(char* filename, int _num_frames)
 		SDL_FreeSurface(image);
 
 	return true;
+}
+
+void Agent::setAlgorithm(PathFindingAlgorithm* _algorithm)
+{
+	algorithm = _algorithm;
 }

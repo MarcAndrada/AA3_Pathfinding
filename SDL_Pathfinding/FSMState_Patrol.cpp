@@ -2,20 +2,29 @@
 #include "FSMState_Evade.h"
 #include "FSMState_Chase.h"
 #include "Agent.h"
+#include "GridManager.h"
+#include "PathFindingAlgorithm.h"
 
 FSMState_Patrol::FSMState_Patrol()
 	:FSMState() {}
 
 void FSMState_Patrol::Enter()
 {
+	nearToTarget = true;
 
 }
 
 FSMState* FSMState_Patrol::Update(Agent* agent, float dtime)
 {
 	currentTime += dtime;
+	
+	if (nearToTarget) 
+	{
+		agent->setTarget(MAZE.GetRandomGridPoint());
+		agent->getAlgorithm()->initAlgorithm(new Node(agent->getTarget(), 1));
+	}
 
-	//agent->setTarget(punto random de la grid);
+	nearToTarget = MAZE.GetGrid()->pix2cell(agent->getPosition()) == MAZE.GetGrid()->pix2cell(agent->getTarget());
 
 	newState = nullptr;
 	if (agent->getBlackboard()->GetData()->isVisible)
@@ -25,10 +34,8 @@ FSMState* FSMState_Patrol::Update(Agent* agent, float dtime)
 		else
 			newState = new FSMState_Chase();
 	}
-
-	if (currentTime >= timeToChange)
-		return newState;
-	return nullptr;
+	
+	return newState;
 }
 
 void FSMState_Patrol::Exit()

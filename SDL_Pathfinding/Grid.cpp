@@ -1,5 +1,5 @@
 #include "Grid.h"
-
+#include "Agent.h"
 using namespace std;
 
 Grid::Grid(char* filename)

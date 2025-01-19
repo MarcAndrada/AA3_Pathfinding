@@ -6,10 +6,10 @@ struct BlackboardData
 	bool hasGun;
 	bool isVisible;
 
-	Vector2D realPlayerPosition;
 	Vector2D lastSeenPlayerPosition;
 
 	Vector2D agentPosition;
+	Vector2D agentForward;
 
 	int percentatgeVision;
 
@@ -17,9 +17,9 @@ struct BlackboardData
 	{
 		hasGun = false;
 		isVisible = false;
-		realPlayerPosition = Vector2D();
 		lastSeenPlayerPosition = Vector2D();
 		agentPosition = Vector2D();
+		agentForward = Vector2D(1, 0);
 		percentatgeVision = 0;
 	}
 };

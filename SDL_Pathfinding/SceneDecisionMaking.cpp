@@ -1,12 +1,12 @@
 #include "SceneDecisionMaking.h"
 #include "PlayerManager.h"
-
+#include "GridManager.h"
 using namespace std;
 
 SceneDecisionMaking::SceneDecisionMaking()
 {
 	draw_grid = false;
-	maze = new Grid("../res/maze.csv");
+	MAZE.SetGrid(new Grid("../res/maze.csv"));
 
 	loadTextures("../res/maze.png", "../res/coin.png");
 
@@ -18,15 +18,20 @@ SceneDecisionMaking::SceneDecisionMaking()
 	player->setTarget(Vector2D(-20, -20));
 	agents.push_back(player);
 
-	// set agent position coords to the center of a random cell
-	Vector2D rand_cell(-1, -1);
-	while (!maze->isValidCell(rand_cell))
-		rand_cell = Vector2D((float)(rand() % maze->getNumCellX()), (float)(rand() % maze->getNumCellY()));
-	
-	PLAYER.SetPlayer(agents[0]);
-	PLAYER.GetPlayer()->setPosition(maze->cell2pix(rand_cell));
+	Agent* enemy = new Agent(true, 50, 50);
+	enemy->loadSpriteTexture("../res/soldier.png", 4);
+	enemy->setBehavior(new PathFollowing);
+	enemy->setTarget(Vector2D(-20, -20));
+	agents.push_back(enemy);
 
-	algorithm = new A(maze, PLAYER.GetPlayer());
+	// set agent position coords to the center of a random cell
+	
+	PLAYER.SetPlayer(player);
+	PLAYER.GetPlayer()->setPosition(MAZE.GetGrid()->cell2pix(MAZE.GetRandomGridPoint()));
+	player->setAlgorithm(new A(MAZE.GetGrid(), PLAYER.GetPlayer()));
+
+	enemy->setPosition(MAZE.GetGrid()->cell2pix(MAZE.GetRandomGridPoint()));
+	enemy->setAlgorithm(new A(MAZE.GetGrid(), enemy));
 }
 
 SceneDecisionMaking::~SceneDecisionMaking()
@@ -52,10 +57,11 @@ void SceneDecisionMaking::update(float dtime, SDL_Event* event)
 	case SDL_MOUSEBUTTONDOWN:
 		if (event->button.button == SDL_BUTTON_LEFT)
 		{
-			Vector2D cell = maze->pix2cell(Vector2D((float)(event->button.x), (float)(event->button.y)));
-			if (maze->isValidCell(cell)) {
+			Vector2D cell = MAZE.GetGrid()->pix2cell(Vector2D((float)(event->button.x), (float)(event->button.y)));
+			if (MAZE.GetGrid()->isValidCell(cell)) {
 				//Aqui calcular el path del player y añadirle cada punto del camino al player
-				algorithm->initAlgorithm(new Node(cell, 1));
+				agents[0]->clearPath();
+				agents[0]->getAlgorithm()->initAlgorithm(new Node(cell, 1));
 			}
 		}
 		break;
@@ -63,8 +69,11 @@ void SceneDecisionMaking::update(float dtime, SDL_Event* event)
 		break;
 	}
 
-	PLAYER.GetPlayer()->update(dtime, event);
-	algorithm->update(dtime);
+
+	for (Agent* currentAgent : agents)
+	{
+		currentAgent->update(dtime, event);
+	}
 }
 
 void SceneDecisionMaking::draw()
@@ -84,8 +93,10 @@ void SceneDecisionMaking::draw()
 		}
 	}
 
-	PLAYER.GetPlayer()->draw();
-	algorithm->draw();
+	for (Agent* currentAgent : agents)
+	{
+		currentAgent->draw();
+	}
 }
 
 const char* SceneDecisionMaking::getTitle()
@@ -98,14 +109,14 @@ void SceneDecisionMaking::drawMaze()
 	SDL_SetRenderDrawColor(TheApp::Instance()->getRenderer(), 0, 0, 255, 255);
 	SDL_Rect rect;
 	Vector2D coords;
-	for (int j = 0; j < maze->getNumCellY(); j++)
+	for (int j = 0; j < MAZE.GetGrid()->getNumCellY(); j++)
 	{
-		for (int i = 0; i < maze->getNumCellX(); i++)
+		for (int i = 0; i < MAZE.GetGrid()->getNumCellX(); i++)
 		{
-			if (!maze->isValidCell(Vector2D((float)i, (float)j)))
+			if (!MAZE.GetGrid()->isValidCell(Vector2D((float)i, (float)j)))
 			{
 				SDL_SetRenderDrawColor(TheApp::Instance()->getRenderer(), 0, 0, 255, 255);
-				coords = maze->cell2pix(Vector2D((float)i, (float)j)) - Vector2D((float)CELL_SIZE / 2, (float)CELL_SIZE / 2);
+				coords = MAZE.GetGrid()->cell2pix(Vector2D((float)i, (float)j)) - Vector2D((float)CELL_SIZE / 2, (float)CELL_SIZE / 2);
 				rect = { (int)coords.x, (int)coords.y, CELL_SIZE, CELL_SIZE };
 				SDL_RenderFillRect(TheApp::Instance()->getRenderer(), &rect);
 			}
@@ -122,7 +133,7 @@ void SceneDecisionMaking::drawMaze()
 
 void SceneDecisionMaking::drawCoin()
 {
-	Vector2D coin_coords = maze->cell2pix(coinPosition);
+	Vector2D coin_coords = MAZE.GetGrid()->cell2pix(coinPosition);
 	int offset = CELL_SIZE / 2;
 	SDL_Rect dstrect = { (int)coin_coords.x - offset, (int)coin_coords.y - offset, CELL_SIZE, CELL_SIZE };
 	SDL_RenderCopy(TheApp::Instance()->getRenderer(), coin_texture, NULL, &dstrect);
@@ -153,7 +164,3 @@ bool SceneDecisionMaking::loadTextures(char* filename_bg, char* filename_coin)
 	return true;
 }
 
-void SceneDecisionMaking::setAlgorithm(PathFindingAlgorithm* _algorithm)
-{
-	algorithm = _algorithm;
-}

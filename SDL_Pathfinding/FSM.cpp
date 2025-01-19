@@ -11,6 +11,7 @@ void FSM::ChangeState(FSMState* newState)
 FSM::FSM()
 {
 	currentState = new FSMState_Patrol();
+	currentState->Enter();
 }
 
 void FSM::Update(Agent *agent, float dtime)

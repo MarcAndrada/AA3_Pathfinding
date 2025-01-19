@@ -1,5 +1,6 @@
 #pragma once
 #include "Grid.h"
+#include "Agent.h"
 #include <queue>
 #include <unordered_map>
 
