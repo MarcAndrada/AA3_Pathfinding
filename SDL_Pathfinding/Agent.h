@@ -76,4 +76,5 @@ public:
 	bool Agent::loadSpriteTexture(char* filename, int num_frames=1);
 	void setAlgorithm(PathFindingAlgorithm* _algorithm);
 	PathFindingAlgorithm* getAlgorithm() { return algorithm; }
+	void setMaxSpeed(float _maxVelocity, float _maxForce);
 };

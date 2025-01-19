@@ -17,13 +17,6 @@ void FSMState_Chase::Enter()
 
 FSMState* FSMState_Chase::Update(Agent* agent, float dtime)
 {
-	/*std::cout << "Chase" << std::endl;*/
-	if (lastPlayerSeenPos == Vector2D()) {
-		lastPlayerSeenPos = MAZE.GetGrid()->pix2cell(agent->getBlackboard()->GetData()->lastSeenPlayerPosition);
-		agent->clearPath();
-		agent->getAlgorithm()->initAlgorithm(new Node(lastPlayerSeenPos, 1));
-	}
-
 	currentTime += dtime;
 	
 	//Si lo ve
@@ -32,12 +25,23 @@ FSMState* FSMState_Chase::Update(Agent* agent, float dtime)
 		<< " | CurrentPlayerPos = " << MAZE.GetGrid()->pix2cell(agent->getPosition()).x 
 		<< "," << MAZE.GetGrid()->pix2cell(agent->getPosition()).y << std::endl;*/
 	
-	if (lastPlayerSeenPos == MAZE.GetGrid()->pix2cell(agent->getPosition()) && agent->getBlackboard()->GetData()->isVisible)
+	if (lastPlayerSeenPos == Vector2D() || 
+		lastPlayerSeenPos == MAZE.GetGrid()->pix2cell(agent->getPosition()) &&
+		agent->getBlackboard()->GetData()->isVisible)
 	{
+		agent->setMaxSpeed(chaseVelocity, chaseForce);
 		lastPlayerSeenPos = MAZE.GetGrid()->pix2cell(agent->getBlackboard()->GetData()->lastSeenPlayerPosition);
 		agent->clearPath();
 		agent->getAlgorithm()->initAlgorithm(new Node(lastPlayerSeenPos, 1));
 	}
+
+
+	if (MAZE.GetGrid()->pix2cell(agent->getPosition()) == MAZE.GetGrid()->pix2cell(PLAYER.GetPlayer()->getPosition()))
+	{
+		PLAYER.GetPlayer()->clearPath();
+		PLAYER.GetPlayer()->setPosition(MAZE.GetGrid()->cell2pix(MAZE.GetRandomGridPoint()));
+	}
+
 
 	newState = nullptr;
 	if (agent->getBlackboard()->GetData()->isVisible && agent->getBlackboard()->GetData()->hasGun)

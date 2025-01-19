@@ -224,3 +224,9 @@ void Agent::setAlgorithm(PathFindingAlgorithm* _algorithm)
 {
 	algorithm = _algorithm;
 }
+
+void Agent::setMaxSpeed(float _maxVelocity, float _maxForce)
+{
+	max_velocity = _maxVelocity;
+	max_force = _maxForce;
+}

@@ -5,6 +5,9 @@ class FSMState_Chase : public FSMState
 {
 private:
 	Vector2D lastPlayerSeenPos;
+
+	float chaseVelocity = 125;
+	float chaseForce = 100;
 public:
 	FSMState_Chase();
 	virtual void Enter() override;

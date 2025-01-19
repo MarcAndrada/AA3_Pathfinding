@@ -11,17 +11,18 @@ FSMState_Patrol::FSMState_Patrol()
 void FSMState_Patrol::Enter()
 {
 	nearToTarget = true;
-
+	
 }
 
 FSMState* FSMState_Patrol::Update(Agent* agent, float dtime)
 {
 	currentTime += dtime;
-	
 	if (nearToTarget) 
 	{
+		agent->clearPath();
 		agent->setTarget(MAZE.GetRandomGridPoint());
 		agent->getAlgorithm()->initAlgorithm(new Node(agent->getTarget(), 1));
+		agent->setMaxSpeed(patrolVelocity, patrolForce);
 	}
 
 	nearToTarget = MAZE.GetGrid()->pix2cell(agent->getPosition()) == MAZE.GetGrid()->pix2cell(agent->getTarget());
